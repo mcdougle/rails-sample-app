@@ -1,0 +1,9 @@
+<% if @user.errors.any? %>
+	<b><%= pluralize @user.errors.count, 'errors' %></b>
+	<ul>
+		<% @user.errors.full_messages.each do |error| %>
+			<li>* <%= error %> </li>
+		<% end %>
+	</ul>
+	
+<% end %>

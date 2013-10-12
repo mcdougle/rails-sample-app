@@ -8,6 +8,14 @@
 </head>
 <body>
 
+<% if flash.any? %>
+	<ul>
+		<% flash.each do |name, msg| %>
+			<%= content_tag :li, msg, class: name %>
+		<% end %>
+	</ul>
+<% end %>
+
 <%= yield %>
 
 <div style="width: 100%; background:#d1d1d1">
