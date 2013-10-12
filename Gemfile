@@ -2,10 +2,14 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+group :development, :test do
+	gem 'sqlite3'
+end
 
-gem 'sqlite3'
+group :test do
+	# this is for rspec and stuff
+	# I haven't played around with that in this project
+end
 
 
 # Gems used only for assets and not required
@@ -20,21 +24,11 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :production do
+	# I don't know. postgres or mysql?
+	# obviously whatever I'd be using for db
+end
+
 gem 'jquery-rails'
-
-# To use ActiveModel has_secure_password
- gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
-
-gem 'will_paginate'
+gem 'bcrypt-ruby', '~> 3.0.0'		# To use ActiveModel has_secure_password
+gem 'will_paginate'					# to paginate items
