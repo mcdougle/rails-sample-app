@@ -8,6 +8,17 @@
 </head>
 <body>
 
+<% if signed_in? %>
+	<div style="float:right; font-size:10px">
+		Signed in as <%= link_to current_user.email, current_user %><br>
+		<%= link_to "Sign Out", signout_path, method: "delete" %>
+	</div>
+<% else %>
+	<div style="float: right; font-size:10px">
+		<%= link_to "Sign In", signin_path %>
+	</div>
+<% end %>
+
 <% if flash.any? %>
 	<ul>
 		<% flash.each do |name, msg| %>
