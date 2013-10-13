@@ -1,1 +1,1 @@
-<% provide :title, "Profile for #{@user.email}" %><%= @user.email %>
+<% provide :title, "Profile for #{@user.email}" %><%= @user.email %><p><% if @user.microposts.any? %>	<h1>User has <%= pluralize(@user.microposts.count, 'micropost') %></h1>	<ol>		<%= render @microposts %>		</ol>	<%= will_paginate @microposts %><% end %>

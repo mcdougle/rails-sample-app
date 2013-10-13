@@ -1,4 +1,9 @@
 <% provide :title, 'Home' %>
 
-<%= link_to "Sign In Here", signin_path %> <br>
-<%= link_to "Sign Up Here", signup_path %>
+<% if signed_in? %>
+	<h1><%= current_user.email %></h1>
+	<%= render 'shared/micropost_form' %>
+	<%= render 'shared/feed' %>
+<% else %>
+	<%= link_to "Sign Up Here", signup_path %>
+<% end %>
