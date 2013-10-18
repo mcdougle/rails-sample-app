@@ -3,6 +3,17 @@ class User < ActiveRecord::Base
 	has_secure_password
 	has_many :microposts, dependent: :destroy
 	
+	 ## followed_users -> my "followeds" -> people I'm following -> people I "have followed"
+		##follower_id is the foreign key because I'M THE FOLLOWER.
+	has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+	has_many :followed_users, through: :relationships, source: :followed
+	 ## followers -> my followers -> people following me
+		## followed_id is the foreign key because I'M THE ONE FOLLOWED
+	has_many :reverse_relationships,	foreign_key: "followed_id", 
+														class_name: "Relationship",
+														dependent: :destroy
+	has_many :followers, through: :reverse_relationships, source: :follower
+	
 	before_save { self.email.downcase! }
 	before_create :create_remember_token
 	
@@ -29,6 +40,19 @@ class User < ActiveRecord::Base
 	### FEED STUFF
 	def feed
 		Micropost.where('user_id = ?', id)		# could just use `microposts` to get current user's list
+	end
+	
+	### RELATIONSHIP STUFF
+	def follow! (other_user)
+		relationships.create!(followed_id: other_user.id)
+	end
+	
+	def unfollow! (other_user)
+		relationships.where(followed_id: other_user.id).first.destroy
+	end
+	
+	def following? (other_user)
+		relationships.where(followed_id: other_user.id).first
 	end
 	
 	private

@@ -1,0 +1,16 @@
+<% provide :title, @title %>
+
+<h1><%= @user.email %></h1>
+<%= render 'shared/stats' %>
+
+<p>
+
+<h3><%= @title %></h3>
+<% if @users.any? %>
+	<ul>
+		<% @users.each do |user| %>
+			<li><%= link_to user.email, user %></li>
+		<% end %>
+	</ul>
+	<%= will_paginate %>
+<% end %>

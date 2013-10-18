@@ -4,6 +4,7 @@
 	<h1><%= current_user.email %></h1>
 	<%= render 'shared/micropost_form' %>
 	<%= render 'shared/feed' %>
+	<%= render 'shared/stats' %>
 <% else %>
 	<%= link_to "Sign Up Here", signup_path %>
 <% end %>
