@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
 	
 	### FEED STUFF
 	def feed
-		Micropost.where('user_id = ?', id)		# could just use `microposts` to get current user's list
+		Micropost.from_users_followed_by(self)
 	end
 	
 	### RELATIONSHIP STUFF
